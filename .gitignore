@@ -10,3 +10,7 @@ wheels/
 .venv
 .env
 
+# Working docs (no forman parte del entregable)
+docs/superpowers/
+CLAUDE.md
+
