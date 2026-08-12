@@ -1,0 +1,115 @@
+# ACME Cloud — Customer FAQ
+
+## Plans and Pricing
+
+ACME Cloud is offered in four plans: Free, Starter, Team, and Enterprise. Starter costs 19 US dollars per user per month when billed monthly, or 190 dollars per user per year when billed annually, which works out to two months free. Team costs 49 dollars per user per month, or 490 dollars per user per year. Enterprise is quoted individually, requires an annual contract, and has a minimum of 50 seats.
+
+The Free plan includes one project, three seats, and 2 GB of file storage, and is supported only through the community forum. Free plans do not include SSO, audit logs, or custom roles. Activity history on Free plans is retained for 30 days and then discarded. Free workspaces with no activity for 180 consecutive days are archived automatically, and the workspace owner is notified by email 14 days before that happens.
+
+Starter raises the limits to 10 projects, 50 GB of storage, and an unlimited number of seats, and it adds email support and CSV import. Starter still does not include SAML SSO. Single sign-on is a Team feature and cannot be bought as an add-on to a Starter subscription, so a team that needs SSO must weigh the 30 dollar per-seat difference against the rest of the Team feature set.
+
+Team includes unlimited projects, 500 GB of storage, SAML SSO, audit logs, role-based permissions, and priority support. Enterprise adds SCIM user provisioning, a choice of data region, a dedicated customer success manager, a signed SOC 2 Type II report, and a 99.95 percent uptime SLA backed by service credits.
+
+Every paid plan can be trialled before purchase. A new workspace receives 14 days of Team features at no cost and without a credit card, and when the trial ends the workspace falls back to Free unless a plan is chosen. A trial can be extended only once, by 7 days, and only by contacting support before it expires.
+
+Nonprofit and academic organisations qualify for a 40 percent discount on Starter and Team after their status is verified, which takes up to five business days. The discount applies to both monthly and annual billing, but it cannot be combined with any other promotional offer or referral credit.
+
+## Billing and Subscriptions
+
+Paid plans are billed monthly on the anniversary of the signup date, or yearly on the anniversary of the upgrade date for annual contracts. The first charge is taken at the moment the plan is selected, and the billing anniversary is set from that date rather than from the date the account was created. Invoices are issued in US dollars regardless of the billing country.
+
+Seats can be added at any time and are charged pro rata for the remainder of the current billing period. Seats removed mid-period do not generate a refund; the seat count drops at the next renewal and the credit is not carried forward. Downgrading from Team to Starter takes effect at the end of the paid period, and features such as audit logs stop being written the moment the downgrade lands.
+
+To cancel a subscription, first open Account, then Billing, then Cancel plan, and confirm the cancellation in the dialog that appears. The workspace keeps full access to paid features until the end of the period already paid for, and then reverts to Free. Cancelling does not delete any data, and the projects that exceed the Free limits become read-only rather than being removed.
+
+Refunds are issued only within 14 days of a first payment on a new subscription. Renewal charges, annual contracts after the first 14 days, and partial months are not refundable. A refund request must be sent from the email address of the workspace owner and is processed within ten business days.
+
+If a payment fails, ACME Cloud retries the charge three times over seven days and emails the billing contact after each attempt. The failure appears in the billing screen as error ERR-2201, which means the card issuer declined the transaction. After 14 days without a successful payment the workspace is downgraded to Free, and the data above the Free limits stays intact but read-only.
+
+Invoices and receipts are available under Account, then Billing, then Invoices, and each one can be downloaded as a PDF. A VAT or tax identification number can be added in the same screen, and it appears on every invoice issued after it is saved, while invoices already issued cannot be reissued with a new tax number. Visa, Mastercard, and American Express are accepted on all paid plans, whereas bank transfer and ACH are available only for annual Enterprise contracts.
+
+## Account and Security
+
+Two-factor authentication is available on every plan, including Free, and it can be enabled by the account holder without administrator involvement. ACME Cloud supports time-based one-time password applications and hardware security keys that implement WebAuthn. Two-factor authentication over SMS is not supported and there are no plans to add it, because SMS codes are vulnerable to SIM swapping.
+
+When two-factor authentication is switched on, ten single-use recovery codes are generated and shown once. Each code works exactly one time, and the whole set can be regenerated from the security settings, which immediately invalidates the previous set. If both the second factor and the recovery codes are lost, identity verification with the support team is the only way to regain access, and it takes up to three business days.
+
+Workspace administrators on Team and Enterprise can require two-factor authentication for every member. Members who have not enrolled are prompted at their next sign-in and are blocked from the workspace until they finish enrolment. The requirement applies to human accounts only, since API tokens and service accounts authenticate with their own credentials.
+
+SAML SSO is available on Team and Enterprise and works with any identity provider that supports SAML 2.0, including Okta, Microsoft Entra ID, and Google Workspace. Configuration is done by uploading the identity provider metadata XML in the workspace security settings and then mapping the email attribute to the ACME Cloud user record. SCIM provisioning, which creates and deactivates accounts automatically from the identity provider, is available on Enterprise only.
+
+Passwords must be at least 12 characters long and are checked against a list of known breached credentials at the moment they are set. Sessions expire after 30 days of inactivity, and every active session can be listed and revoked individually from the security settings. Revoking a session does not revoke API tokens, which have to be deleted separately.
+
+Four roles exist: Owner, Admin, Member, and Viewer. Only the Owner can transfer ownership or delete the workspace, and there is exactly one Owner at a time. Admins manage members, billing, and integrations but cannot delete the workspace, while Viewers have read-only access and cannot create or edit projects.
+
+## Getting Started
+
+A new account is created by signing up with an email address and password, or through Google or Microsoft. The confirmation email must be opened within 24 hours or the verification link expires, and a new link can be requested from the sign-in screen. Accounts that are never verified are removed after 30 days.
+
+Setting up a first workspace takes four steps. First, choose a workspace name and URL slug, which becomes part of every shared link and cannot be changed afterwards. Second, select the data region, which is a permanent choice explained in the data section. Third, invite the people who will use the workspace, and fourth, create the first project from a template or from an empty canvas.
+
+Invitations are sent by email and expire after seven days. An expired invitation can be resent from the members screen, and resending generates a new link that invalidates the old one. Invited people who already have an ACME Cloud account join the workspace with their existing credentials instead of creating a second account.
+
+Existing data can be imported from a CSV file on Starter and above. The file must be UTF-8 encoded, use a comma as the delimiter, include a header row, and be no larger than 100 MB or 50000 rows, whichever limit is reached first. Larger data sets have to be split into several files, and the import runs in the background while the rest of the workspace stays usable.
+
+Templates are available for the most common use cases and can be applied when a project is created or later from the project menu. Applying a template to an existing project adds its structure without touching the records already there, so nothing is overwritten. A workspace can also save any project as a custom template, which is a Team feature.
+
+The web application supports the last two major versions of Chrome, Firefox, Safari, and Edge, and it is not tested on Internet Explorer. Mobile applications for iOS and Android cover reading, commenting, and notifications, but project settings and billing are available only in the browser. A workspace opened on a phone browser falls back to a simplified layout rather than to the mobile application.
+
+The onboarding checklist in the sidebar tracks the setup tasks that remain and disappears once they are all complete. It can be dismissed permanently at any time from the checklist menu, and dismissing it for one member does not hide it for the others.
+
+## Data and Privacy
+
+Customer data is stored in the United States, in the us-east-1 region, by default. Workspaces on Team and Enterprise may instead choose the eu-central-1 region in Frankfurt at the moment the workspace is created. The region cannot be changed afterwards, because migrating a live workspace between regions would require downtime and a new set of storage identifiers, so moving regions means exporting the data and creating a new workspace.
+
+All data is encrypted at rest with AES-256 and in transit with TLS 1.3. Encryption keys are managed by ACME Cloud and rotated annually, and customer-managed keys are available on Enterprise contracts on request. Database backups run every six hours and are retained for 35 days.
+
+ACME Cloud does not use customer content to train machine learning models, and no customer data is shared with model providers. Aggregated and anonymised usage metrics, such as how often a feature is opened, are collected to guide product decisions, and this telemetry can be disabled for the whole workspace by an administrator.
+
+A data processing addendum that meets the requirements of the GDPR is available to every customer and can be signed electronically from the legal section of the account settings. The current list of subprocessors is published on the website, and customers who subscribe to the change notice receive 30 days of advance warning before a new subprocessor is added. ACME Cloud completes a SOC 2 Type II audit annually and holds ISO 27001 certification, and the SOC 2 report is shared with Enterprise customers under a non-disclosure agreement.
+
+Any member with Admin rights can export the full contents of a workspace as JSON or CSV at any time, on any plan including Free. Exports run in the background and the download link is emailed when the archive is ready, which normally takes a few minutes but can take several hours for workspaces above 1 GB. Download links expire after 72 hours.
+
+Deleting a workspace starts a 30 day grace period during which the Owner can restore it from the account settings. After 30 days the data is purged from the production systems, and it disappears from encrypted backups within a further 90 days. Individual records deleted inside a project go to a trash area for 30 days and can be restored from there.
+
+## API and Integrations
+
+The REST API is served from the base address api.acmecloud.com/v2 and returns JSON. Version 1 was retired in March and no longer accepts requests, and every endpoint under it responds with HTTP 410. Requests must be made over HTTPS, since plain HTTP connections are redirected once and then refused.
+
+Two authentication methods exist. Personal access tokens are created in the account settings, carry the permissions of the user who created them, and can be scoped to read, write, or admin. OAuth 2.0 is used by third-party applications and issues tokens on behalf of a user through the authorisation code flow with PKCE. A token sent with the wrong scope produces HTTP 403 rather than 401, which is the response for a missing or invalid token.
+
+The API rate limit is 60 requests per minute on Free, 600 on Starter, 3000 on Team, and negotiated individually on Enterprise. Limits are counted per token rather than per workspace, so splitting work across several tokens does raise effective throughput. Exceeding the limit returns HTTP 429 with a Retry-After header giving the number of seconds to wait, and clients are expected to honour that header instead of retrying immediately.
+
+List endpoints are paginated with an opaque cursor. Each response carries a next_cursor field, and a page holds at most 100 items regardless of the size requested. Request bodies are limited to 10 MB, and a larger payload is rejected with HTTP 413 before it is parsed.
+
+Webhooks deliver events to any HTTPS endpoint registered in the workspace integration settings. Every delivery is signed with HMAC-SHA256 using the webhook secret, and the signature travels in the X-ACME-Signature header, which the receiver should verify before acting on the payload. An endpoint has 10 seconds to answer with a 2xx status, and anything else counts as a failure, after which the delivery is retried five times with exponential backoff over 24 hours before being dropped.
+
+Native integrations exist for Slack, GitHub, Jira, and Zapier, and they are installed from the integrations directory by an Admin. Official SDKs are published for Python and JavaScript and wrap authentication, pagination, and retry handling.
+
+## Support and SLAs
+
+Support is delivered at a level that depends on the plan. Free customers use the community forum, which is monitored by the support team but carries no response commitment. Starter customers get email support with a first response within 24 business hours, Team customers get priority email and live chat with a first response within 8 business hours, and Enterprise customers get 24/7 telephone support with a dedicated customer success manager.
+
+Business hours are Monday to Friday, 09:00 to 18:00 Central European Time, excluding public holidays in Germany. A ticket opened on Friday evening therefore starts counting from Monday morning. Enterprise response commitments are the exception, since they are measured in calendar hours and apply at any time of day.
+
+Tickets are classified into four severities. A severity 1 issue means the service is unavailable or data is at risk, and it is answered within 4 hours on Team and within 1 hour on Enterprise. Severity 2 covers a major feature that is broken with no workaround, severity 3 covers degraded behaviour with a workaround available, and severity 4 covers questions and feature requests. Customers can propose a severity when opening a ticket, and the support team confirms or adjusts it.
+
+Enterprise contracts carry a 99.95 percent monthly uptime commitment measured against the availability of the API and the web application. If uptime falls below 99.95 percent in a calendar month the customer is entitled to a service credit of 10 percent of the monthly fee, below 99.0 percent the credit is 25 percent, and below 95.0 percent it is 50 percent. Credits are not automatic, so they must be requested within 30 days of the end of the affected month, and they are applied to the next invoice rather than refunded in cash.
+
+A support ticket is opened from the help menu inside the application or by writing to support@acmecloud.com from the address registered on the account. Tickets that include the workspace slug, the exact time of the problem, and the request identifier from the response header are resolved noticeably faster. Anyone in the workspace can open a ticket, but only Admins and the Owner can ask about billing or contract matters.
+
+Current and historical availability is published on the status page at status.acmecloud.com, which can send notifications by email, RSS, or webhook. Scheduled maintenance takes place on Sundays between 02:00 and 04:00 UTC and is announced at least 72 hours in advance. Maintenance windows do not count against the uptime commitment, whereas unannounced downtime does.
+
+## Troubleshooting
+
+A sign-in that loops back to the login screen is almost always caused by blocked third-party cookies or by a stale session cookie. Clearing the cookies for the acmecloud.com domain and signing in again resolves it in most cases, and using a private browsing window is a quick way to confirm the diagnosis. If the loop only affects members who sign in through SSO, the cause is on the identity provider side rather than in the browser.
+
+Error ERR-4012 during an SSO sign-in means the SAML assertion did not match a known user, and the usual reason is that the email address in the identity provider differs from the one on the ACME Cloud account. Correcting the email attribute mapping in the identity provider fixes it, and the change takes effect on the next sign-in attempt without any action inside ACME Cloud. Error ERR-4015, in contrast, means the identity provider certificate has expired and the metadata has to be uploaded again.
+
+Repeated HTTP 429 responses from the API mean the rate limit for that token has been exhausted. The correct fix is to read the Retry-After header, pause for the number of seconds it gives, and then resume, because retrying in a tight loop extends the block instead of clearing it. Sustained traffic above the plan limit needs either a plan upgrade or a second token, since limits are counted per token.
+
+A CSV import that fails immediately is usually rejected for encoding or structure. The file must be UTF-8 without a byte order mark, use commas rather than semicolons, and start with a header row whose column names match the target fields. An import that starts and then stops partway through leaves the rows already processed in place, and re-running the same file skips them rather than duplicating them.
+
+An invitation email that never arrives is most often in a spam folder or blocked by a corporate mail filter. Invitations expire after seven days, so an old link fails even when it does arrive, and resending from the members screen issues a fresh one. When several invitations to the same domain go missing, the domain administrator should allow mail from notifications.acmecloud.com.
+
+Requests that return HTTP 503 during a scheduled maintenance window are expected, and clients should retry once the window closes. A 503 outside a maintenance window is an incident, and it should be reported through support together with the request identifier from the X-Request-Id response header.
