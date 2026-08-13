@@ -10,9 +10,9 @@ client = OpenAI(base_url=BASE_URL, api_key="lm-studio")
 
 
 def embed(text: str) -> np.ndarray:
-    vec = client.embeddings.create(model=EMBED_MODEL, input=text).data[0].embedding
-    arr = np.array(vec, dtype="float32")
-    return arr / np.linalg.norm(arr)
+    response = client.embeddings.create(model=EMBED_MODEL, input=text)
+    vector = np.array(response.data[0].embedding, dtype="float32")
+    return vector / np.linalg.norm(vector)
 
 
 def main() -> None:
@@ -25,7 +25,8 @@ def main() -> None:
     print(f"inconexo  (esperado < 0.4) : {float(a @ c):.4f}")
 
     reply = client.chat.completions.create(
-        model=LLM_MODEL, temperature=0,
+        model=LLM_MODEL,
+        temperature=0,
         messages=[{"role": "user", "content": "Reply with exactly: OK"}],
     )
     print(f"llm                : {reply.choices[0].message.content!r}")

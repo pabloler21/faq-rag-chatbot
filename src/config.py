@@ -1,7 +1,7 @@
 """Single source of configuration. os.getenv() must not appear anywhere else."""
 import os
 from pathlib import Path
-from typing import Literal
+from typing import Literal, NamedTuple
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -24,30 +24,64 @@ TOP_K = int(os.getenv("TOP_K", "5"))
 MIN_SCORE = float(os.getenv("MIN_SCORE", "0.65"))
 MIN_CHUNKS = 2          # the rubric requires returning 2-5 chunks, always
 
-_ENDPOINTS = {
-    "llm":   ("LLM_BASE_URL",   "http://localhost:1234/v1",  "LLM_API_KEY",    "lm-studio"),
-    "embed": ("EMBED_BASE_URL", "http://localhost:1234/v1",  "EMBED_API_KEY",  "lm-studio"),
-    "judge": ("JUDGE_BASE_URL", "https://api.openai.com/v1", "OPENAI_API_KEY", ""),
+Role = Literal["llm", "embed", "judge"]
+
+
+class _Endpoint(NamedTuple):
+    """Which env vars carry the URL and key for one role, and their fallbacks."""
+
+    url_var: str
+    url_default: str
+    key_var: str
+    key_default: str
+
+
+_ENDPOINTS: dict[Role, _Endpoint] = {
+    "llm": _Endpoint(
+        url_var="LLM_BASE_URL",
+        url_default="http://localhost:1234/v1",
+        key_var="LLM_API_KEY",
+        key_default="lm-studio",
+    ),
+    "embed": _Endpoint(
+        url_var="EMBED_BASE_URL",
+        url_default="http://localhost:1234/v1",
+        key_var="EMBED_API_KEY",
+        key_default="lm-studio",
+    ),
+    "judge": _Endpoint(
+        url_var="JUDGE_BASE_URL",
+        url_default="https://api.openai.com/v1",
+        key_var="OPENAI_API_KEY",
+        key_default="",
+    ),
 }
 
 
-def endpoint_url(role: Literal["llm", "embed", "judge"]) -> str:
+def endpoint_url(role: Role) -> str:
     """The URL a role actually talks to, for error messages."""
-    url_var, url_default, _, _ = _ENDPOINTS[role]
-    return os.getenv(url_var, url_default)
+    endpoint = _ENDPOINTS[role]
+    return os.getenv(endpoint.url_var, endpoint.url_default)
 
 
-def unreachable(role: Literal["llm", "embed", "judge"]) -> RuntimeError:
+def unreachable(role: Role) -> RuntimeError:
     """Turn httpx connection noise into an actionable message."""
     url = endpoint_url(role)
-    hint = "Is LM Studio running with the server started?" if "localhost" in url else "Check your network."
+
+    if "localhost" in url:
+        hint = "Is LM Studio running with the server started?"
+    else:
+        hint = "Check your network."
+
     return RuntimeError(f"Cannot reach the '{role}' endpoint at {url}. {hint}")
 
 
-def get_client(role: Literal["llm", "embed", "judge"]) -> OpenAI:
+def get_client(role: Role) -> OpenAI:
     """Return an OpenAI-compatible client for the given role."""
-    url_var, url_default, key_var, key_default = _ENDPOINTS[role]
-    api_key = os.getenv(key_var, key_default)
+    endpoint = _ENDPOINTS[role]
+    api_key = os.getenv(endpoint.key_var, endpoint.key_default)
+
     if not api_key:
-        raise RuntimeError(f"Missing {key_var}. Set it in your .env file.")
-    return OpenAI(base_url=os.getenv(url_var, url_default), api_key=api_key)
+        raise RuntimeError(f"Missing {endpoint.key_var}. Set it in your .env file.")
+
+    return OpenAI(base_url=endpoint_url(role), api_key=api_key)
